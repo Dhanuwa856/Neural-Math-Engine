@@ -23,3 +23,21 @@ class DenseLayer:
         self.input = input_data
         self.output = np.dot(self.input, self.weights) + self.biases
         return self.output
+
+    def backward(self, output_error, learning_rate):
+        """
+        output_error: ඊළඟ layer එකෙන් ලැබෙන වැරැද්ද (Gradient)
+        learning_rate: අපි කොච්චර වේගයෙන් ඉගෙන ගන්නවාද කියන අගය (Alpha)
+        """
+
+        # 1. Weights වලට ලැබෙන error එක (Input.T * Error)
+        # මෙතනදී Transpose (.T) කරන්නේ Matrix shapes ගැලපෙන්න
+        input_error = np.dot(output_error, self.weights.T)
+        weight_error = np.dot(self.input.T, output_error)
+
+        # 2. Weights සහ Biases update කිරීම (Gradient Descent)
+        self.weights -= learning_rate * weight_error
+        self.biases -= learning_rate * output_error
+
+        # 3. කලින් layer එකට අවශ්‍ය error එක ආපසු යැවීම
+        return input_error
