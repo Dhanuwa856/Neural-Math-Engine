@@ -41,3 +41,27 @@ class DenseLayer:
 
         # 3. කලින් layer එකට අවශ්‍ය error එක ආපසු යැවීම
         return input_error
+
+class ActivationLayer:
+    def __init__(self, activation, activation_derivative):
+        """
+        activation: පාවිච්චි කරන function එක (උදා: sigmoid)
+        activation_derivative: එහි derivative එක
+        """
+        self.activation = activation
+        self.activation_derivative = activation_derivative
+        self.input = None
+        self.output = None
+
+    def forward(self, input_data):
+        self.input = input_data
+        self.output = self.activation(self.input)
+        return self.output
+
+    def backward(self, output_error, learning_rate):
+        """
+        Backpropagation: output_error * f'(input)
+        මෙහිදී learning_rate එක පාවිච්චි වෙන්නේ නැහැ (මොකද මෙතන weights නැති නිසා),
+        නමුත් engine එකේ loop එකට ගැලපෙන්න ඒක මෙතන තියෙන්න ඕනේ.
+        """
+        return output_error * self.activation_derivative(self.input)

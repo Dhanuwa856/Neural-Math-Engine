@@ -1,6 +1,6 @@
 import numpy as np
 
-class Activation:
+class Activations:
     @staticmethod
     def sigmoid(x):
         """
