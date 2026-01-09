@@ -8,7 +8,7 @@ class DenseLayer:
         output_size: මේ layer එකේ neurons ගණන
         """
         # Weights ආරම්භයේදී ඉතා කුඩා random අගයන් ලෙස (Mean 0, Std 1)
-        self.weights = np.random.randn(input_size, output_size) * 0.01
+        self.weights = np.random.randn(input_size, output_size) * 0.5
         # Biases ආරම්භයේදී 0 ලෙස
         self.biases = np.zeros((1, output_size))
 
@@ -64,4 +64,4 @@ class ActivationLayer:
         මෙහිදී learning_rate එක පාවිච්චි වෙන්නේ නැහැ (මොකද මෙතන weights නැති නිසා),
         නමුත් engine එකේ loop එකට ගැලපෙන්න ඒක මෙතන තියෙන්න ඕනේ.
         """
-        return output_error * self.activation_derivative(self.input)
+        return output_error * self.activation_derivative(self.output)

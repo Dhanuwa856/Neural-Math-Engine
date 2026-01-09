@@ -17,4 +17,4 @@ class Loss:
         Backpropagation වලදී weights update කරන්න මේක ඕනේ.
         Formula: 2/n * (y_pred - y_true)
         """
-        return 2 * (y_true - y_pred) / y_true.size
+        return 2 * (y_pred - y_true) / y_true.size
