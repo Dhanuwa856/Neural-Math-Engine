@@ -27,6 +27,7 @@ class NeuralNetwork:
         """
         epochs: කී පාරක් දත්ත සියල්ල කියවිය යුතුද?
         """
+        errors = []  # Error ටික ගබඩා කරන්න
         for i in range(epochs):
             display_error = 0
             for j in range(len(x_train)):
@@ -45,7 +46,9 @@ class NeuralNetwork:
                 # වැරැද්ද ආපස්සට යවමු (Reverse order)
                 for layer in reversed(self.layers):
                     error = layer.backward(error, learning_rate)
-
+            errors.append(display_error / len(x_train))  # List එකට දාමු
             # හැම 100 epoch එකකටම පාරක් output එක පෙන්වමු
             if (i + 1) % 100 == 0:
                 print(f'Epoch {i + 1}/{epochs}  Error={display_error / len(x_train)}')
+
+        return errors

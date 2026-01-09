@@ -1,45 +1,52 @@
 import numpy as np
 import sys
 import os
+import matplotlib.pyplot as plt
 
-# අපේ engine එක පාවිච්චි කිරීමට path එක සකස් කරමු
+# Path setup
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from engine.network import NeuralNetwork
-from engine.layers import DenseLayer, ActivationLayer # ActivationLayer එකත් ගමු
+from engine.layers import DenseLayer, ActivationLayer
 from engine.activations import Activations
 from engine.loss import Loss
 
-# 1. දත්ත සකස් කරමු (XOR Data)
+# 1. දත්ත සකස් කිරීම (XOR Data)
 x_train = np.array([[[0,0]], [[0,1]], [[1,0]], [[1,1]]])
 y_train = np.array([[[0]], [[1]], [[1]], [[0]]])
 
+# 2. Network එක නිර්මාණය කිරීම
 net = NeuralNetwork()
-
-# Layer 1: Input (2) -> Hidden (3)
-net.add(DenseLayer(2, 4))
+net.add(DenseLayer(2, 4)) # Input -> Hidden
 net.add(ActivationLayer(Activations.sigmoid, Activations.sigmoid_derivative))
-
-# Layer 2: Hidden (3) -> Output (1)
-net.add(DenseLayer(4, 1))
+net.add(DenseLayer(4, 1)) # Hidden -> Output
 net.add(ActivationLayer(Activations.sigmoid, Activations.sigmoid_derivative))
 
 net.set_loss(Loss.mse, Loss.mse_derivative)
 
-# Train
-net.train(x_train, y_train, epochs=5000, learning_rate=0.2)
+# 3. පුහුණු කිරීම (Training) - මෙහිදී errors list එක ලැබෙනවා
+print("--- Training Started ---")
+errors = net.train(x_train, y_train, epochs=5000, learning_rate=0.2)
+print("--- Training Completed ---")
 
-# --- 4. Testing Phase ---
-print("\n" + "=" * 30)
-print("FINAL TESTING RESULTS")
-print("=" * 30)
+# 4. පරීක්ෂා කිරීම (Final Testing)
+print("\n" + "=" * 45)
+print(f"{'INPUT':<15} | {'TARGET':<10} | {'PREDICTION':<12}")
+print("-" * 45)
 
 for x, y in zip(x_train, y_train):
-    # Model එකෙන් output එක ලබා ගැනීම
     output = net.predict(x)
+    pred_val = output[0][0]
+    result = np.round(pred_val)
+    print(f"{str(x[0]):<15} | {str(y[0]):<10} | {pred_val:.4f} (-> {int(result)})")
 
-    # ප්‍රතිඵලය ලස්සනට පෙන්වීම
-    # np.round පාවිච්චි කරන්නේ 0.002 වගේ අගයන් 0 ටත්, 0.99 වගේ ඒවා 1 ටත් සමාන කර බලන්නයි
-    print(f"Input: {x[0]} | Target: {y[0]} | Prediction: {output[0]} | Result: {np.round(output[0])}")
+print("=" * 45)
 
-print("=" * 30)
+# 5. ප්‍රස්තාරය ඇඳීම (Visualization)
+plt.figure(figsize=(10, 5))
+plt.plot(errors, color='blue', linewidth=2)
+plt.xlabel('Epochs')
+plt.ylabel('Mean Squared Error')
+plt.title('Neural Network Learning Curve (XOR Problem)')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
