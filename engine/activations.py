@@ -43,3 +43,18 @@ class Activations:
         # Tanh වල derivative එක: 1 - tanh(x)^2
         # අපේ ActivationLayer එකේ අපි දෙන්නේ output එක නිසා මෙහෙම ලියමු
         return 1 - output ** 2
+
+
+    @staticmethod
+    def softmax(x):
+        # Numerical stability සඳහා max අගය අඩු කරමු
+        e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+        return e_x / np.sum(e_x, axis=1, keepdims=True)
+
+    @staticmethod
+    def softmax_derivative(output):
+        # Softmax derivative එක Cross-Entropy සමඟ එකතු වූ විට සරල වේ.
+        # දැනට මෙය dummy එකක් ලෙස තබමු.
+        return output
+
+

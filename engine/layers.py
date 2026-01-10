@@ -8,7 +8,7 @@ class DenseLayer:
         output_size: මේ layer එකේ neurons ගණන
         """
         # Weights ආරම්භයේදී ඉතා කුඩා random අගයන් ලෙස (Mean 0, Std 1)
-        self.weights = np.random.randn(input_size, output_size) * 0.5
+        self.weights = np.random.randn(input_size, output_size) * 0.1
         # Biases ආරම්භයේදී 0 ලෙස
         self.biases = np.zeros((1, output_size))
 

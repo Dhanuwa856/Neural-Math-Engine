@@ -26,7 +26,7 @@ net.set_loss(Loss.mse, Loss.mse_derivative)
 
 # 3. පුහුණු කිරීම (Training) - මෙහිදී errors list එක ලැබෙනවා
 print("--- Training Started ---")
-errors = net.train(x_train, y_train, epochs=5000, learning_rate=0.2)
+errors = net.train(x_train, y_train, epochs= 5000, learning_rate= 0.2)
 print("--- Training Completed ---")
 
 # 4. පරීක්ෂා කිරීම (Final Testing)
