@@ -1,6 +1,7 @@
 import numpy as np
 import sys
 import os
+import pickle
 
 # Path setup
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -33,6 +34,17 @@ net.set_loss(Loss.cross_entropy, Loss.cross_entropy_derivative)
 print("Training Smart MNIST Classifier...")
 # Learning rate එක 0.1 සහ epochs 50ක් දෙමු
 net.train(x_train, y_train, epochs=50, learning_rate=0.1)
+
+
+# Model එක save කිරීම
+def save_model(network, filename='mnist_model.pkl'):
+    with open(filename, 'wb') as f:
+        # අපේ මුළු network object එකම file එකට දානවා
+        pickle.dump(network, f)
+    print(f"\n✅ Model saved successfully as {filename}")
+
+# භාවිතය:
+save_model(net)
 
 # 4. Final Testing
 print("\n" + "="*30)

@@ -1,4 +1,5 @@
 import numpy as np
+import pickle
 
 class NeuralNetwork:
     def __init__(self):
@@ -52,3 +53,15 @@ class NeuralNetwork:
                 print(f'Epoch {i + 1}/{epochs}  Error={display_error / len(x_train)}')
 
         return errors
+
+    def save(self, file_name):
+        """මුළු Network එකම file එකක save කරයි"""
+        with open(file_name, 'wb') as f:
+            pickle.dump(self, f)
+        print(f'✅ Model saved to {file_name}')
+
+    @staticmethod
+    def load(file_name):
+        """File එකකින් model එකක් load කර පාවිච්චි කිරීමට ලබා දෙයි"""
+        with open(file_name, 'rb') as f:
+            return pickle.load(f)
