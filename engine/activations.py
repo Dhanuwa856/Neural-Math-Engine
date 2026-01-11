@@ -47,10 +47,10 @@ class Activations:
 
     @staticmethod
     def softmax(x):
-        # Numerical stability සඳහා max අගය අඩු කරමු
+        # Numerical stability: Max අගය අඩු කරලා, ඉතා කුඩා අගයක් (1e-10) එකතු කරමු
         shift_x = x - np.max(x, axis=1, keepdims=True)
         exps = np.exp(shift_x)
-        return exps / np.sum(exps, axis=1, keepdims=True)
+        return exps / (np.sum(exps, axis=1, keepdims=True)+ 1e-10)
 
 
     @staticmethod

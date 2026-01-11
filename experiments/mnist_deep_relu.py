@@ -33,7 +33,7 @@ net.set_loss(Loss.cross_entropy, Loss.cross_entropy_derivative)
 
 # 2. Training (Learning rate එක 0.01 වගේ පොඩි අගයක් තබන්න ReLU වලදී)
 print("🚀 Training Deep ReLU Network...")
-net.train(x_train, y_train, epochs=50, learning_rate=0.01)
+net.train(x_train, y_train, epochs=100, learning_rate=0.0001)
 
 # 3. Save the best model
 net.save('mnist_deep_model.pkl')

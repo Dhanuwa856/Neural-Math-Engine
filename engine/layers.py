@@ -8,7 +8,9 @@ class DenseLayer:
         output_size: මේ layer එකේ neurons ගණන
         """
         # Weights ආරම්භයේදී ඉතා කුඩා random අගයන් ලෙස (Mean 0, Std 1)
-        self.weights = np.random.randn(input_size, output_size) * 0.1
+        # self.weights = np.random.randn(input_size, output_size) * 0.1
+        # He Initialization (ReLU සඳහා වඩාත් සුදුසුයි)
+        self.weights = np.random.randn(input_size, output_size) * np.sqrt(2.0 / input_size)
         # Biases ආරම්භයේදී 0 ලෙස
         self.biases = np.zeros((1, output_size))
 
@@ -32,15 +34,25 @@ class DenseLayer:
 
         # 1. Weights වලට ලැබෙන error එක (Input.T * Error)
         # මෙතනදී Transpose (.T) කරන්නේ Matrix shapes ගැලපෙන්න
-        input_error = np.dot(output_error, self.weights.T)
-        weight_error = np.dot(self.input.T, output_error)
+        # input_error = np.dot(output_error, self.weights.T)
+        # weight_error = np.dot(self.input.T, output_error)
 
         # 2. Weights සහ Biases update කිරීම (Gradient Descent)
-        self.weights -= learning_rate * weight_error
-        self.biases -= learning_rate * output_error
+        # self.weights -= learning_rate * weight_error
+        # self.biases -= learning_rate * output_error
 
-        # 3. කලින් layer එකට අවශ්‍ය error එක ආපසු යැවීම
+        input_error = np.dot(output_error, self.weights.T)
+        weights_error = np.dot(self.input.T, output_error)
+
+        # Gradient Clipping: වැරැද්ද පිපිරෙන්න නොදී සීමා කරමු
+        weights_error = np.clip(weights_error, -1, 1)
+
+        # Update parameters
+        self.weights -= learning_rate * weights_error
+        self.biases -= learning_rate * np.clip(output_error, -1, 1)
         return input_error
+
+
 
 class ActivationLayer:
     def __init__(self, activation, activation_derivative):
