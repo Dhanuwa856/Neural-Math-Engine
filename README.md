@@ -36,7 +36,7 @@ Testing the model with digits drawn in MS Paint:
 |                  Target Digit: 5 (95.60%)                   |               Target Digit: 2 (89.98%)               |
 |:-----------------------------------------------------------:|:----------------------------------------------------:|
 |       ![Digit 5 MS Paint](/experiments/digit-04.png)        |   ![Digit 2 MS Paint ](/experiments/digit-05.png)    |
-|    ![Digit 5](/assets/Screenshot 2026-01-11 082115.png)     | ![Digit 2](/assets/Screenshot 2026-01-11 082329.png) |
+|    ![Digit 5](/assets/Screenshot05.png)     | ![Digit 2](/assets/Screenshot02.png) |
 
 ---
 
