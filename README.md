@@ -84,6 +84,7 @@ Neural-Math-Engine/
 │
 └── mnist_model.pkl     # Pre-trained 89% accuracy model
 ````
+---
 ## 📦 Requirements
 - Python 3.x
 - NumPy
