@@ -85,13 +85,32 @@ Neural-Math-Engine/
 └── mnist_model.pkl     # Pre-trained 89% accuracy model
 ````
 ---
+## 🕹️ How to Use (Main Entry Point)
+The engine features a built-in CLI for easy navigation between different experiments.
+
+1. **Clone the repository**:
+   ```bash
+   git clone [https://github.com/Dhanuwa856/Neural-Math-Engine.git](https://github.com/Dhanuwa856/Neural-Math-Engine.git)
+   cd Neural-math-engine
+   ```
+2. **Run the Main Control Center:**
+```bash
+python main.py
+```
+3. **Choose an Option:**
+- Option 1 (XOR Problem): Demonstrates the engine's ability to solve non-linear logic gates using the Sigmoid activation function.
+- Option 2 (MNIST Training): Trains a 3-layer Deep ReLU network on 5,000 samples. It uses He Initialization and Gradient Clipping to ensure a stable 89%+ accuracy.
+- Option 3 (Custom Prediction): Test the engine with your own drawings! Place a 28x28 .png file in the root directory and see the AI identify it with high confidence (e.g., 95.60% for a bold '5').
+   
+
+---
 ## 📦 Requirements
 - Python 3.x
 - NumPy
 - Matplotlib (for visualization)
 - Pillow (for custom image inference)
 ---
-- ## 🏗️ Future Scope
+## 🏗️ Future Scope
 - Implement **Convolutional Neural Networks (CNN)** layers for better image feature extraction.
 - Add support for **Momentum** and **Adam** optimizers.
 ---
