@@ -32,4 +32,4 @@ def predict_my_digit(image_path):
 
 
 if __name__ == "__main__":
-    predict_my_digit('digit-02.png')
+    predict_my_digit('digit-04.png')

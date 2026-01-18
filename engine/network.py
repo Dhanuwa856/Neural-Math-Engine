@@ -65,3 +65,13 @@ class NeuralNetwork:
         """File එකකින් model එකක් load කර පාවිච්චි කිරීමට ලබා දෙයි"""
         with open(file_name, 'rb') as f:
             return pickle.load(f)
+
+    # def backward(self, d_values, learning_rate):
+    #     """
+    #     අන්තිම Layer එකේ ඉඳන් මුල් Layer එක දක්වා
+    #     ආපස්සට (Reverse) යමින් Weights නිවැරදි කිරීම.
+    #     """
+    #     gradient = d_values
+    #     # Layers ලිස්ට් එක අග ඉඳන් මුලට (Reversed) පාවිච්චි කරනවා
+    #     for layer in reversed(self.layers):
+    #         gradient = layer.backward(gradient, learning_rate)
