@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.datasets import fetch_openml
 
 
-def load_mnist_data(limit=2000):
+def load_mnist_data(limit=10000):
     print(f"Loading {limit} images from MNIST... (This may take a minute)")
 
     # 1. MNIST දත්ත ලබා ගැනීම

@@ -53,7 +53,7 @@ def run_xor_experiment():
 
 def run_mnist_training():
     print("\n🚀 Starting MNIST Deep Training...")
-    (x_train, y_train), (x_test, y_test), (y_train_raw, y_test_raw) = load_mnist_data(limit=5000)
+    (x_train, y_train), (x_test, y_test), (y_train_raw, y_test_raw) = load_mnist_data()
 
     net = NeuralNetwork()
     net.add(DenseLayer(784, 128))
@@ -66,7 +66,7 @@ def run_mnist_training():
     net.set_loss(Loss.cross_entropy, Loss.cross_entropy_derivative)
 
     # NaN පාලනය සඳහා learning_rate=0.0001 පාවිච්චි වේ
-    net.train(x_train, y_train, epochs=70, learning_rate=0.0001)
+    net.train(x_train, y_train, epochs=15, learning_rate=0.0001)
     net.save('mnist_deep_model.pkl')
 
 
@@ -112,7 +112,7 @@ def main_menu():
         elif choice == '3':
             run_custom_prediction()
         elif choice == '4':
-            print("Happy Coding! 💪❤️");
+            print("Happy Coding! 💪❤️")
             break
         else:
             print("❌ Invalid choice!")
